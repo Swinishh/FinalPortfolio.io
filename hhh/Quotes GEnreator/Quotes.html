@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Box Shadow</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <div class="centered-box">
+    <p id="para" class="para">Click on the Generate button for a quote......</p>
+  <div>
+  <button id="Generate">Generate</button>
+  <button id="Close">Close</button>
+  </div>
+
+
+  </div>
+</body>
+
+<script>
+// Select elements
+const Para = document.getElementById('para');
+const Generate = document.getElementById('Generate');
+const Close = document.getElementById('Close');
+
+// Array of quotes
+const quotes = [
+  {
+    text: "The best way to predict the future is to invent it.",
+    author: "Alan Kay"
+  },
+  {
+    text: "Life is 10% what happens to us and 90% how we react to it.",
+    author: "Charles R. Swindoll"
+  },
+  {
+    text: "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+    author: "Winston Churchill"
+  },
+  {
+    text: "Do not wait to strike till the iron is hot, but make it hot by striking.",
+    author: "William B. Sprague"
+  },
+  {
+    text: "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+    author: "Nelson Mandela"
+  }
+];
+
+// Function to generate a random quote
+function generateQuote() {
+  // Get a random index
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+
+  // Get the quote object
+  const randomQuote = quotes[randomIndex];
+
+  // Update the paragraph with the quote and author
+  Para.textContent = `"${randomQuote.text}" - ${randomQuote.author}`;
+}
+
+// Function to close the quote (reset to initial state)
+function closeQuote() {
+  Para.textContent = "Click on the Generate button for a quote......";
+}
+
+// Attach event listeners to buttons
+Generate.addEventListener('click', generateQuote);
+Close.addEventListener('click', closeQuote);
+
+
+</script>
+</html>

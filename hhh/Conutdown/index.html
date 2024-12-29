@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer with Input</title>
+</head>
+<style>
+    /* Center the div and style the body */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    /* 3D box styling */
+    .countdown-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      transform: perspective(500px) rotateX(10deg);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .countdown-container:hover {
+      transform: perspective(500px) rotateX(0deg);
+    }
+
+    /* Label and input field styling */
+    label {
+      font-size: 1.2rem;
+      color: #333;
+      margin-right: 10px;
+    }
+
+    #timerInput {
+      padding: 8px;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      outline: none;
+      width: 200px;
+    }
+
+    #timerInput:focus {
+      border-color: #007bff;
+    }
+
+    /* Button styling */
+    #startBtn {
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    /* Button hover effect */
+    #startBtn:hover {
+      transform: scale(1.1);
+      background-color: #45a049;
+    }
+
+    /* Countdown text styling */
+    #countdownDisplay {
+      font-size: 1.5rem;
+      color: #333;
+      margin-top: 15px;
+    }
+
+    /* Error message styling */
+    .error-message {
+      color: red;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+  </style>
+<body>
+
+  <!-- Div with an input field, button, and countdown display -->
+  <div>
+    <label for="timerInput">Enter countdown time (seconds): </label>
+    <input type="number" id="timerInput" min="1" placeholder="Enter time in seconds" />
+    <button id="startBtn">Start Countdown</button>
+    <p id="countdownDisplay"></p>
+  </div>
+
+  <script>
+    // Countdown logic
+    const startBtn = document.getElementById("startBtn");
+    const countdownDisplay = document.getElementById("countdownDisplay");
+    const timerInput = document.getElementById("timerInput");
+
+    let countdownInterval;
+
+    startBtn.addEventListener("click", () => {
+      let countdownTime = parseInt(timerInput.value); // Get the input value as an integer
+
+      // Check if the input is a valid number and greater than 0
+      if (isNaN(countdownTime) || countdownTime <= 0) {
+        countdownDisplay.textContent = "Please enter a valid positive number!";
+        return;
+      }
+
+      // Clear any previous interval
+      clearInterval(countdownInterval);
+
+      countdownInterval = setInterval(() => {
+        countdownDisplay.textContent = countdownTime + " seconds remaining";
+
+        if (countdownTime === 0) {
+          clearInterval(countdownInterval);
+          countdownDisplay.textContent = "Countdown finished!";
+        } else {
+          countdownTime--;
+        }
+      }, 1000);
+    });
+  </script>
+
+</body>
+</html>
